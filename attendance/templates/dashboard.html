@@ -1,0 +1,101 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+
+
+<div class="container ">
+    <h1 class="text-center my-4">Employee Attendance Dashboard</h1>
+    <div class="row my-3 d-flex justify-content-center">
+        <div class="col-md-4 col-sm-6">
+            {% comment %} Employees Present Today {{present_employees}} <br> Employees Absent today {{absent_employees}} <br> {% endcomment %}
+            <canvas id="chart1"></canvas>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            {% comment %} Employees Check-in Today before 9 a.m. {{employees_before_9}} <br> Employees Check-in Today after 9 a.m. {{employees_after_9}} <br> {% endcomment %}
+            <canvas id="chart2"></canvas>
+        </div>
+    </div>
+    <div class="row my-3 d-flex justify-content-center">
+        <div class="col-md-4 col-sm-6">
+            {% comment %} Employees With Last Check-out {{present_employees_with_checkout}} <br> Employees missing Last Check-out {{present_employees_missing_checkout}} {% endcomment %}
+            <canvas id="chart3"></canvas>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            {% comment %} Employees Last Check-out before 3:45 p.m. {{present_employees_with_checkout_before_345}} <br> Employees Last Check-out after 3:45 p.m. {{present_employees_with_checkout_after_345}} {% endcomment %}
+            <canvas id="chart4"></canvas>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    new Chart(document.getElementById('chart1'), {
+      type: 'pie',
+      data: {
+        labels: ["Employees Present Today", "Employees Absent Today"],
+        datasets: [{
+          backgroundColor: ["#5843CE", "#01CBCB",],
+        data: [{{present_employees}}, {{absent_employees}}]
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Pie Chart for admin panel'
+        },
+        responsive: true
+      }
+    });
+    new Chart(document.getElementById('chart2'), {
+      type: 'doughnut',
+      data: {
+        labels: ["Employees Check-in Today before 9 A.M.", "Employees Check-in Today after 9 A.M."],
+        datasets: [{
+          backgroundColor: ["#5843CE", "#01CBCB",],
+        data: [{{employees_before_9}}, {{employees_after_9}}]
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Pie Chart for admin panel'
+        },
+        responsive: true
+      }
+    });
+    new Chart(document.getElementById('chart3'), {
+      type: 'pie',
+      data: {
+        labels: ["Employees With Last Check-out", "Employees Missing Last Check-out"],
+        datasets: [{
+          backgroundColor: ["#5843CE", "#01CBCB",],
+        data: [{{present_employees_with_checkout}}, {{present_employees_missing_checkout}}]
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Pie Chart for admin panel'
+        },
+        responsive: true
+      }
+    });
+    new Chart(document.getElementById('chart4'), {
+      type: 'doughnut',
+      data: {
+        labels: ["Employees Last Check-out before 3:45 P.M.", "Employees Last Check-out after 3:45 P.M."],
+        datasets: [{
+          backgroundColor: ["#5843CE", "#01CBCB",],
+        data: [{{present_employees_with_checkout_before_345}}, {{present_employees_with_checkout_after_345}}]
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Pie Chart for admin panel'
+        },
+        responsive: true
+      }
+    });
+</script>
+{%endblock%}

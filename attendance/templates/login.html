@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{%block content%}
+
+    
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <form method="post">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+            {% comment %} <div class="form-floating">
+                <label for="floatingInput">ID</label>
+                <input type="text" class="form-control" name="emp_dig_id" placeholder="EMP_DIG_ID">
+                
+            </div>
+            <div class="form-floating">
+                <label for="floatingPassword">Password</label>
+                <input type="password" class="form-control" name="emp_password" placeholder="Password">
+                
+            </div> {% endcomment %}
+            {{form.as_p}}
+            <button class="w-100 btn btn-primary my-4" type="submit">Login</button>
+        </form>
+    </div>
+</div>
+
+    
+{%endblock%}
+```

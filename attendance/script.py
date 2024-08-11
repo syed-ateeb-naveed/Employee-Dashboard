@@ -25,6 +25,7 @@ def create_attendance():
         att.EMP_DIG_ID = EMPLOYEE_LOGIN.objects.get(EMP_DIG_ID=id)
         checkin_time = datetime.strptime("08:00:00", "%H:%M:%S") + timedelta(minutes=random.randint(0, 90))
         checkout_time = datetime.strptime("15:00:00", "%H:%M:%S") + timedelta(minutes=random.randint(0, 60))
-        att.EMP_CHECKIN_DATETIME = checkin_time.replace(year=2024, month=3, day=20).strftime("%Y-%m-%d %H:%M:%S")
-        att.EMP_CHECKOUT_DATETIME = checkout_time.replace(year=2024, month=3, day=20).strftime("%Y-%m-%d %H:%M:%S") if random.choice([True, False]) else None
+        current_date = datetime.now().date()
+        att.EMP_CHECKIN_DATETIME = checkin_time.replace(year=current_date.year, month=current_date.month, day=current_date.day).strftime("%Y-%m-%d %H:%M:%S")
+        att.EMP_CHECKOUT_DATETIME = checkout_time.replace(year=current_date.year, month=current_date.month, day=current_date.day).strftime("%Y-%m-%d %H:%M:%S") if random.choice([True, False]) else None
         att.save()
